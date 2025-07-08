@@ -30,7 +30,7 @@ def update_todo(todo_id: int, session: SessionDep):
     todo_db = session.get(Todo, todo_id)
     if not todo_db:
         raise HTTPException(status_code=404, detail="Todo not found")
-    todo_db.compoleted = not todo_db.compoleted
+    todo_db.completed = not todo_db.completed
     session.add(todo_db)
     session.commit()
     session.refresh(todo_db)
@@ -39,7 +39,7 @@ def update_todo(todo_id: int, session: SessionDep):
 
 @router.delete("/todos/completed")
 def delete_completed_todos(session: SessionDep):
-    completed_todos = session.exec(select(Todo).where(Todo.compoleted == True)).all()
+    completed_todos = session.exec(select(Todo).where(Todo.completed == True)).all()
     deleted_count = len(completed_todos)
     for todo in completed_todos:
         session.delete(todo)

@@ -7,7 +7,7 @@ class TodoBase(SQLModel):
 
 class Todo(TodoBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    compoleted: bool = Field(default=False)
+    completed: bool = Field(default=False)
 
 
 class TodoCreate(TodoBase):
