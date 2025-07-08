@@ -1,10 +1,14 @@
+import os
 from typing import Annotated
 
 from fastapi import FastAPI, Depends, HTTPException
 from contextlib import asynccontextmanager
 from sqlmodel import Field, Session, SQLModel, create_engine, select
+from dotenv import load_dotenv
 
 from .routers import common 
+
+load_dotenv()
 
 class TodoBase(SQLModel):
     title: str = Field(..., min_length=1, max_length=10)
@@ -16,7 +20,11 @@ class Todo(TodoBase, table=True):
 class TodoCreate(TodoBase):
     pass
 
-DATABASE_URL = "sqlite:///todo.db"
+# DATABASE_URL = "sqlite:///todo.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable not set")
+
 engine = create_engine(DATABASE_URL, echo=True)
 
 def create_db_and_tables():
