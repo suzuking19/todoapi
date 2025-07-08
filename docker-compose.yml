@@ -3,17 +3,22 @@ services:
     build:
       context: .
       dockerfile: containers/postgresql/Dockerfile
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     volumes:
       - db_data:/var/lib/postgresql/data
-    healthcheck:
-      test: pg_isready -U "${POSTGRES_USER:-postgres}" || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    env_file:
+      - .env
     environment:
-      - POSTGRES_NAME
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
   app:
     build:
       context: .
