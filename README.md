@@ -12,6 +12,16 @@ For local development, a Python virtual environment (venv) is used to manage dep
 
 ローカル開発では、依存関係の管理とエディタの補完を正しく機能させるために、Python の仮想環境（venv）を使用しています。**venv 内でエディタ補完を正しく機能させるために、ローカルの Python バージョンが 3.12 であることを必ず確認してください。**
 
+## Testing (テスト)
+
+To run tests, use the following command:
+
+テストを実行するには、以下のコマンドを使用してください：
+
+```bash
+PYTHONPATH=. pytest
+```
+
 ## References (参考文献)
 
 This project was developed with great reference to the following resources:
@@ -23,3 +33,6 @@ This project was developed with great reference to the following resources:
 
 - **Full Stack FastAPI Template**: [https://github.com/fastapi/full-stack-fastapi-template](https://github.com/fastapi/full-stack-fastapi-template) - This repository served as an invaluable reference for project structure, Docker configuration, and FastAPI application architecture.
 - **Full Stack FastAPI Template**: [https://github.com/fastapi/full-stack-fastapi-template](https://github.com/fastapi/full-stack-fastapi-template) - このリポジトリは、プロジェクト構造、Docker 構成、および FastAPI アプリケーションアーキテクチャにとって非常に貴重な参考資料となりました。
+
+- **SQLModel Testing Documentation**: [https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#add-the-rest-of-the-tests](https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#add-the-rest-of-the-tests) - This comprehensive testing guide provided excellent patterns and best practices for testing FastAPI applications with SQLModel, including setup of test databases and test client configurations.
+- **SQLModel テストドキュメント**: [https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#add-the-rest-of-the-tests](https://sqlmodel.tiangolo.com/tutorial/fastapi/tests/#add-the-rest-of-the-tests) - この包括的なテストガイドは、テストデータベースの設定とテストクライアントの構成を含む、SQLModel を使用した FastAPI アプリケーションのテストに関する優れたパターンとベストプラクティスを提供してくれました。
